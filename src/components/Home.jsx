@@ -1,11 +1,17 @@
-// import { Link } from "react-router-dom";
+import styled from "styled-components";
+
+const BackgroundImage = styled.div`
+  background-image: url("./src/assets/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  background-size: cover;
+  height: 30rem;
+`
 
 function Home() {
   return (
     <>
-      <div>Home</div>
-      
-      
+      <BackgroundImage data-testid="bg-image" ></BackgroundImage>
     </>
   );
 }
