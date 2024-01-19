@@ -1,7 +1,7 @@
 import { createBrowserRouter as Router , RouterProvider } from "react-router-dom";
-import NavBar from "../components/NavBar/NavBar";
-import Home from "../components/Home/Home"; 
-import Store from "../components/Store/Store";
+import NavBar from "../components/NavBar";
+import Home from "../components/Home"; 
+import Store from "../components/Store";
 
 function Root() {
   const router = Router([
