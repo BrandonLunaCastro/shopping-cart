@@ -5,7 +5,8 @@ const BackgroundImage = styled.div`
   background-repeat: no-repeat;
   background-position: bottom;
   background-size: cover;
-  height: 30rem;
+  background-attachment: fixed;
+  height: 35rem;
 `
 
 function Home() {
