@@ -3,11 +3,11 @@ import NavBar from "../components/NavBar";
 import Home from "../components/Home"; 
 import Store from "../components/Store";
 
-function Root() {
+function Root({articles, setArticles, added ,setAdded}) {
   const router = Router([
     {
       path:"/",
-      element:<NavBar />,
+      element:<NavBar mount={articles} added={added}/>,
       children: [
         {
           path:"/",
@@ -15,7 +15,7 @@ function Root() {
         },
         {
           path:"/store",
-          element:<Store />
+          element:<Store setArticles={setArticles} setAdded={setAdded} added={added}/>
         }
       ]
     }
