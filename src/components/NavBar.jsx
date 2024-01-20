@@ -1,6 +1,7 @@
 import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import cart from "../assets/svg/cart-shopping.svg"
+import { useState } from "react";
 
 
 // styles
@@ -40,10 +41,27 @@ import cart from "../assets/svg/cart-shopping.svg"
   const Cart = styled.img`
     width: 2rem;
     height: 2rem;
+    cursor: pointer ;
   `
 
+  const Window = styled.article`
+    width: 500px;
+    height: 500px;
+    border: 1px solid gray;
+    position: fixed;
+    background-color: #333;
+    color: white;
+    right: 0;
+    top: 3rem;
+  `
 
-function NavBar() {
+function NavBar({mount, added}) {
+  const [ cartOpen, setCart ] = useState(false);
+  console.log(added)
+  const handleCart = () => {
+    !cartOpen ? setCart(true) : setCart(false);
+  }
+
   return (
     <>
       <Nav>
@@ -56,10 +74,19 @@ function NavBar() {
             <NavLink to="/store">Store</NavLink>
           </li>
           <li>
-            <Cart src={cart} alt="cart-icon"></Cart>
+            <Cart src={cart} alt="cart-icon" onClick={handleCart}></Cart>
+            <span>{mount}</span>
           </li>
         </List>
       </Nav>
+      { cartOpen && 
+        (
+          <Window>
+            <p>catntidad de articulos = {mount}</p>
+            
+          </Window>
+        )
+      }
       <Detail id="detail">
           <Outlet></Outlet>
       </Detail>
