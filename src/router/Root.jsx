@@ -7,7 +7,7 @@ function Root({articles, setArticles, added ,setAdded}) {
   const router = Router([
     {
       path:"/",
-      element:<NavBar mount={articles} added={added}/>,
+      element:<NavBar amount={articles} added={added}/>,
       children: [
         {
           path:"/",
