@@ -85,6 +85,10 @@ function NavBar({amount, added}) {
     !cartOpen ? setCart(true) : setCart(false);
   }
 
+  const subTotal = added.reduce((acu,current) => {
+    return acu+=current.price
+  },0); 
+
   return (
     <>
       <Nav>
@@ -113,7 +117,7 @@ function NavBar({amount, added}) {
                     <div>
                       <img src={art.image}></img>
                       <p>{art.title}</p>
-                      <p>{art.price}</p>
+                      <p>Total: {art.price}</p>
                     </div>
                     <div>
                       <button>+</button>
@@ -124,7 +128,9 @@ function NavBar({amount, added}) {
                 )
               })
             }
-            
+            {added.length !== 0 && 
+              <p>SubTotal: ${subTotal}</p>
+            }
           </Window>
         )
       }
