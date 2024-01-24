@@ -40,7 +40,6 @@ function Store({ setArticles, setAdded, added, setData, data }) {
 
   const addToCart = (element) => {
     console.log(element);
-    setArticles((articles) => articles + 1);
     setAdded((prevState) => [...prevState, element]);
   };
 
