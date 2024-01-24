@@ -4,18 +4,18 @@ import styled from "styled-components";
 
 const Cards = styled.section`
   display: grid;
-  grid-template-columns: repeat(auto-fill,minmax(250px, 1fr));
-  grid-template-rows: repeat(auto-fill,minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
   align-items: center;
-`
+`;
 
 const Card = styled.article`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  border: 1px solid gray; 
+  border: 1px solid gray;
   padding: 10px;
   min-height: 250px;
   & > img {
@@ -25,43 +25,40 @@ const Card = styled.article`
   }
 
   & > button {
-    width: 100% ;
+    width: 100%;
     height: 45px;
   }
-
-`
-function Store({setArticles, setAdded, added}) {
-  const [data, setData] = useState([]);
+`;
+function Store({ setArticles, setAdded, added, setData, data }) {
+  // const [data, setData] = useState([]);
 
   useEffect(() => {
-    fetchData().then(res => setData(res))
-  },[])
+    fetchData().then((res) => setData(res));
+  }, [setData]);
 
   // console.log(data)
-  
-  const addToCart= (element) => {
-    console.log(element)
-    setArticles(articles => articles + 1)
-    setAdded(prevState => [...prevState, element])
-  }
-  
+
+  const addToCart = (element) => {
+    console.log(element);
+    setArticles((articles) => articles + 1);
+    setAdded((prevState) => [...prevState, element]);
+  };
+
   return (
     <>
       <h1>Main articles</h1>
       <Cards>
-      { data && 
-        data.map((el) => {
-          
-          return (
-            <Card key={el.id}>                                                                                   
-              <p>{el.title}</p>
-              <img src={el.image} alt={el.title}></img>
-              <span>${el.price}</span>
-              <button onClick={() => addToCart(el)}>Add to cart</button>
-            </Card>
-          )
-        })
-      }
+        {data &&
+          data.map((el) => {
+            return (
+              <Card key={el.id}>
+                <p>{el.title}</p>
+                <img src={el.image} alt={el.title}></img>
+                <span>${el.price}</span>
+                <button onClick={() => addToCart(el)}>Add to cart</button>
+              </Card>
+            );
+          })}
       </Cards>
     </>
   );
