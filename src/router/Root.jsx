@@ -7,8 +7,6 @@ import Home from "../components/Home";
 import Store from "../components/Store";
 
 function Root({
-  articles,
-  setArticles,
   added,
   setAdded,
   setData,
@@ -19,7 +17,6 @@ function Root({
       path: "/",
       element: (
         <NavBar
-          amount={articles}
           added={added}
           setAdded={setAdded}
           data={data}
@@ -34,7 +31,6 @@ function Root({
           path: "/store",
           element: (
             <Store
-              setArticles={setArticles}
               setAdded={setAdded}
               added={added}
               setData={setData}

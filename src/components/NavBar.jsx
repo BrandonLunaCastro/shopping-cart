@@ -84,7 +84,7 @@ const Delete = styled.button`
 `
 
 
-function NavBar({ amount, added, setAdded,data }) {
+function NavBar({ added, setAdded,data }) {
   const [cartOpen, setCart] = useState(false);
 
   const handleCart = () => {
@@ -150,7 +150,8 @@ function NavBar({ amount, added, setAdded,data }) {
                   <div>
                     <img src={art.image}></img>
                     <p>{art.title}</p>
-                    <p>Total: {art.price}</p>
+                    { art.price <= 0 ? handleDelete(art.id) : <p>Total: {art.price}</p>}
+                    
                   </div>
                   <div>
                     <button onClick={() => handleMore(art.id)}>+</button>
