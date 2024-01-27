@@ -104,7 +104,7 @@ function NavBar({ added, setAdded,data }) {
       return art
     })
 
-    setAdded(newState);
+    setAdded(prevState => newState);
   } 
 
   const handleReduce = (id) => {

@@ -6,21 +6,12 @@ import NavBar from "../components/NavBar";
 import Home from "../components/Home";
 import Store from "../components/Store";
 
-function Root({
-  added,
-  setAdded,
-  setData,
-  data,
-}) {
+function Root() {
   const router = Router([
     {
       path: "/",
       element: (
-        <NavBar
-          added={added}
-          setAdded={setAdded}
-          data={data}
-        />
+        <NavBar />
       ),
       children: [
         {
@@ -30,12 +21,7 @@ function Root({
         {
           path: "/store",
           element: (
-            <Store
-              setAdded={setAdded}
-              added={added}
-              setData={setData}
-              data={data}
-            />
+            <Store />
           ),
         },
       ],
