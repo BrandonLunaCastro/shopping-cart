@@ -1,0 +1,1 @@
+export const verifyElement = (arr, id) => arr.some(el => el.id === id); 
