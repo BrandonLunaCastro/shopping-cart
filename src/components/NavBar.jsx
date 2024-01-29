@@ -1,8 +1,9 @@
 import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import cart from "../assets/svg/cart-shopping.svg";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import getPrice from "../services/getPrice";
+import { ShoppingCartContext } from "../context/ShoppingCartContext";
 
 // styles
 const Nav = styled.nav`
@@ -83,8 +84,8 @@ const Delete = styled.button`
   height: 3rem;
 `
 
-
-function NavBar({ added, setAdded,data }) {
+function NavBar() {
+  const {added, setAdded, data} = useContext(ShoppingCartContext);
   const [cartOpen, setCart] = useState(false);
 
   const handleCart = () => {
@@ -96,32 +97,30 @@ function NavBar({ added, setAdded,data }) {
   }, 0);
 
   const handleMore = (id) => {
-    const actualArticle = getPrice( data, id );
+    const price = getPrice( data, id );
     const newState = added.map((art) => {
       if ( art.id === id ) {
-        return {...art, price: art.price+=actualArticle[0].price}
+        return {...art, price: art.price + price }
       }
       return art
     })
-
-    setAdded(prevState => newState);
+    setAdded(newState);
   } 
 
   const handleReduce = (id) => {
-    const actualArticle = getPrice( data, id );
+    const price = getPrice( data, id );
     const newState = added.map((art) => {
       if ( art.id === id ) {
-        return {...art, price: art.price-=actualArticle[0].price}
+        return {...art, price: art.price - price}
       }
       return art
     })
-
     setAdded(newState);
   }
 
   const handleDelete = (id) => {
-    const stateFilter = added.filter((art) => art.id !== id)
-    setAdded(stateFilter);
+      const stateFilter = added.filter((art) => art.id !== id)
+      setAdded(stateFilter);
   }
 
   return (
@@ -145,14 +144,14 @@ function NavBar({ added, setAdded,data }) {
         <Window>
           {added.length !== 0 ? (
             added.map((art) => {
+              if ( art.price <= 0 )return <p>zero</p>
               return (
                 <ElementCart key={art.id}>
                   <div>
                     <img src={art.image}></img>
                     <p>{art.title}</p>
-                    { art.price <= 0 ? handleDelete(art.id) : <p>Total: {art.price}</p>}
-                    
-                  </div>
+                    <p>${art.price}</p>
+                  </div> 
                   <div>
                     <button onClick={() => handleMore(art.id)}>+</button>
                     <button onClick={() => handleReduce(art.id)}>-</button>
