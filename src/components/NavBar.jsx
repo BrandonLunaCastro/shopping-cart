@@ -87,10 +87,7 @@ const Delete = styled.button`
 function NavBar() {
   const {added, setAdded, data} = useContext(ShoppingCartContext);
   const [cartOpen, setCart] = useState(false);
-
-  const handleCart = () => {
-    !cartOpen ? setCart(true) : setCart(false);
-  };
+  const handleCart = () => setCart(!cartOpen);
 
   const subTotal = added.reduce((acu, current) => {
     return (acu += current.price);
@@ -100,7 +97,7 @@ function NavBar() {
     const price = getPrice( data, id );
     const newState = added.map((art) => {
       if ( art.id === id ) {
-        return {...art, price: art.price + price }
+        return {...art, price: art.price + price, mount: art.mount + 1 }
       }
       return art
     })
@@ -109,9 +106,16 @@ function NavBar() {
 
   const handleReduce = (id) => {
     const price = getPrice( data, id );
+    const actualElement = added.find(el => el.id === id )
+
+    if ( actualElement.price - price <= 0 ) {
+      const stateFiltered = added.filter((element) => element.id != id )
+      return setAdded(stateFiltered);
+    }
+    
     const newState = added.map((art) => {
       if ( art.id === id ) {
-        return {...art, price: art.price - price}
+        return {...art, price: art.price - price, mount: art.mount - 1 }
       }
       return art
     })
@@ -144,7 +148,6 @@ function NavBar() {
         <Window>
           {added.length !== 0 ? (
             added.map((art) => {
-              if ( art.price <= 0 )return <p>zero</p>
               return (
                 <ElementCart key={art.id}>
                   <div>
@@ -155,6 +158,7 @@ function NavBar() {
                   <div>
                     <button onClick={() => handleMore(art.id)}>+</button>
                     <button onClick={() => handleReduce(art.id)}>-</button>
+                    <p>Amount: {art.mount} </p>
                   </div>
                   <Delete onClick={() => handleDelete(art.id)} >Remove Item</Delete>
                 </ElementCart>
