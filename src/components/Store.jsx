@@ -2,13 +2,14 @@ import { useContext, useEffect } from "react";
 import fetchData from "../services/fetchData";
 import styled from "styled-components";
 import { ShoppingCartContext } from "../context/ShoppingCartContext";
+import { verifyElement } from "../services/verifyElement";
 
 const Cards = styled.section`
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-template-rows: repeat(auto-fill, minmax(250px, 1fr));
   gap: 20px;
-  align-items: center;        
+  align-items: center;
 `;
 
 const Card = styled.article`
@@ -31,19 +32,19 @@ const Card = styled.article`
   }
 `;
 function Store() {
-  // const [data, setData] = useState([]);
-  //{ setArticles, setAdded, added, setData, data }
-  
-  const {setAdded, setData, added, data} = useContext(ShoppingCartContext);
+  const { setAdded, setData, added, data } = useContext(ShoppingCartContext);
 
   useEffect(() => {
     fetchData().then((res) => setData(res));
   }, [setData]);
 
   const addToCart = (id) => {
-    const selectElement = data.find((element) => element.id === id)
-    setAdded((prevState) => [...prevState, selectElement]);
-  };  
+    const selectElement = data.find((element) => element.id === id);
+    selectElement.mount = 1;
+    verifyElement(added, id)
+      ? alert("is exist")
+      : setAdded((prevState) => [...prevState, selectElement]);
+  };
 
   return (
     <>
@@ -66,4 +67,3 @@ function Store() {
 }
 
 export default Store;
-  
