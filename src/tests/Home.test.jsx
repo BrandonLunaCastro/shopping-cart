@@ -6,12 +6,9 @@ describe("Home component", () => {
   it("I should correct render", () => {
     render(<Home />);
   });
-
   it("It should by an image background" , () => {
     render(<Home />);
     const image = screen.getByTestId("bg-image")
     expect(image).toBeInTheDocument();
   })
-
-
 });
