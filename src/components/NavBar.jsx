@@ -153,7 +153,7 @@ function NavBar() {
                   <div>
                     <img src={art.image}></img>
                     <p>{art.title}</p>
-                    <p>${art.price}</p>
+                    <p>${art.price.toFixed(2)}</p>
                   </div> 
                   <div>
                     <button onClick={() => handleMore(art.id)}>+</button>
