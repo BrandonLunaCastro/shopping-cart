@@ -32,7 +32,7 @@ const Card = styled.article`
   }
 `;
 function Store() {
-  const { setAdded, setData, added, data } = useContext(ShoppingCartContext);
+  const { setData, added, data, addArticle } = useContext(ShoppingCartContext);
 
   useEffect(() => {
     fetchData().then((res) => setData(res));
@@ -43,7 +43,7 @@ function Store() {
     selectElement.mount = 1;
     verifyElement(added, id)
       ? alert("is exist")
-      : setAdded((prevState) => [...prevState, selectElement]);
+      : addArticle(selectElement);
   };
 
   return (
