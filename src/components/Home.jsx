@@ -12,6 +12,7 @@ const BackgroundImage = styled.div`
 function Home() {
   return (
     <>
+      <h1>You are in Home</h1>
       <BackgroundImage data-testid="bg-image" ></BackgroundImage>
     </>
   );
