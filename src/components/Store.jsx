@@ -53,11 +53,14 @@ function Store() {
         {data &&
           data.map((el) => {
             return (
-              <Card key={el.id}>
+              <Card 
+                key={el.id}
+                data-testid = {`article-item-${el.id}`}
+              >                                 
                 <p>{el.title}</p>
                 <img src={el.image} alt={el.title}></img>
                 <span>${el.price}</span>
-                <button onClick={() => addToCart(el.id)}>Add to cart</button>
+                <button onClick={() => addToCart(el.id)} name="add" >Add to cart</button>
               </Card>
             );
           })}
