@@ -55,7 +55,7 @@ function Store() {
             return (
               <Card 
                 key={el.id}
-                data-testid = {`article-item-${el.id}`}
+                data-testid="articles-container"
               >                                 
                 <p>{el.title}</p>
                 <img src={el.image} alt={el.title}></img>
