@@ -108,6 +108,7 @@ function NavBar() {
       </Nav>
       {cartOpen && (
         <Window>
+          <h2>Articles Added</h2>
           {added.length !== 0 ? (
             added.map((art) => {
               return (
