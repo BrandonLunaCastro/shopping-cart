@@ -5,14 +5,3 @@ exports[`Should be render App > should  be open the cart 1`] = `
   The actual Cart is empty
 </p>
 `;
-
-exports[`Should be render App > should be add article on view of Snapshot 1`] = `
-[
-  <p>
-    Mens Casual Premium Slim Fit T-Shirts 
-  </p>,
-  <p>
-    Mens Casual Slim Fit
-  </p>,
-]
-`;
