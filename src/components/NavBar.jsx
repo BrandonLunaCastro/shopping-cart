@@ -112,7 +112,7 @@ function NavBar() {
           {added.length !== 0 ? (
             added.map((art) => {
               return (
-                <ElementCart key={art.id} datatest-id="article-cart" >
+                <ElementCart key={art.id} data-testid="article-cart" >
                   <div>
                     <img src={art.image}></img>
                     <p>{art.title}</p>
