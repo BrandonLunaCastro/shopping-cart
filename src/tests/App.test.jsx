@@ -45,5 +45,6 @@ describe("Should be render App", () => {
     const articles = await screen.findAllByTestId("article-cart"); 
     expect(articles.length).toBe(1);
   });
+  
 
 });
