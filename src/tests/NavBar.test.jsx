@@ -1,11 +1,7 @@
 import {
-  afterEach,
-  beforeEach,
   describe,
   expect,
-  expectTypeOf,
   it,
-  should,
   vi,
 } from "vitest";
 import NavBar from "../components/NavBar";
@@ -33,12 +29,24 @@ const initialAdded = [
 const initialSubTotal = 109.95 
 
 describe("component <NavBar />", () => {
-
   const userInteraction = async () => {
     const user = userEvent.setup();
     const buttonCart = screen.getByAltText("cart-icon");
     user.click(buttonCart);
   }
+
+  const customRender = (value="") => {
+    return (
+      render(
+            <ShoppingCartContext.Provider value={value}>
+                <BrowserRouter>
+                  <NavBar />
+                </BrowserRouter>
+            </ShoppingCartContext.Provider>
+        )
+    )
+  }
+
 
   it("should be show a links of page", () => {
     render(
@@ -53,14 +61,7 @@ describe("component <NavBar />", () => {
   })
 
   it("should be render a one articles", async () => {
-    render(
-        <ShoppingCartContext.Provider value={{added: initialAdded, subTotal: initialSubTotal}}>
-            <BrowserRouter>
-              <NavBar />
-            </BrowserRouter>
-        </ShoppingCartContext.Provider>
-    )
-    
+    customRender({added: initialAdded, subTotal: initialSubTotal})
     userInteraction();
     const articles = await screen.findAllByTestId("article-cart");
     expect(articles.length).toBe(1);
@@ -78,13 +79,34 @@ describe("component <NavBar />", () => {
     expect(await screen.findByText(/the actual cart is empty/i)).toBeInTheDocument();
   })
 
-/*   it("should be increase the amount of article", async () => {
-    userInteraction();
+  it("should be call function handleMore and handleReduce", async () => {
     const user = userEvent.setup();
-    const buttonIncrease = await screen.findByRole("button", {name: "+" })
-    await user.click(buttonIncrease)
+    const handleMore = vi.fn();
+    const handleReduce = vi.fn();
+    
+    customRender({added: initialAdded, subTotal: initialSubTotal, handleMore, handleReduce})
+    userInteraction();
+    
+    const increaseBtn = await screen.findByRole("button", { name: "+" });
+    const minusBtn = await screen.findByRole("button", { name: "-" });
+    
+    await user.click(minusBtn);
+    await user.click(increaseBtn);
 
-    expect(await screen.find)
-  })
- */
+    expect(handleMore).toHaveBeenCalled();
+    expect(handleReduce).toHaveBeenCalled();
+    
+  });
+
+  it("is doesn't call functions",async () => {  
+    const handleMore = vi.fn();
+    const handleReduce = vi.fn();
+    
+    customRender({added: initialAdded, subTotal: initialSubTotal, handleMore})
+    userInteraction();
+
+    expect(handleMore).not.toHaveBeenCalled();
+    expect(handleReduce).not.toHaveBeenCalled();    
+  });
+
 });
