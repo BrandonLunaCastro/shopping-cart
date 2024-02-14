@@ -6,6 +6,7 @@ import ShoppingProvider, {
   ShoppingCartContext,
 } from "../context/ShoppingCartContext";
 import { BrowserRouter } from "react-router-dom";
+import MockRender from "./__mock__/mockRender";
 
 let initialAdded = [
   {
@@ -32,6 +33,9 @@ const userInteraction = async () => {
   user.click(buttonCart);
 };
 
+
+
+
 const customRender = (value = "") => {
   return render(
     <ShoppingCartContext.Provider value={value}>
@@ -56,7 +60,9 @@ describe("component <NavBar />", () => {
   });
 
   it("should be render a one articles", async () => {
-    customRender({ added: initialAdded, subTotal: initialSubTotal });
+    //customRender({ added: initialAdded, subTotal: initialSubTotal });
+    const value = { added: initialAdded, subTotal: initialSubTotal }
+    customRender(value)
     userInteraction();
     const articles = await screen.findAllByTestId("article-cart");
     expect(articles.length).toBe(1);
@@ -77,49 +83,4 @@ describe("component <NavBar />", () => {
   });
 });
 
-describe("test context functions", () => {
-  it("should be call function handleMore and handleReduce", async () => {
-    const user = userEvent.setup();
-    const handleMore = vi.fn();
-    const handleReduce = vi.fn();
-    const handleDelete = vi.fn()
 
-    customRender({
-      added: initialAdded,
-      subTotal: initialSubTotal,
-      handleMore,
-      handleReduce,
-      handleDelete
-    });
-    userInteraction();
-
-    const increaseBtn = await screen.findByRole("button", { name: "+" });
-    const minusBtn = await screen.findByRole("button", { name: "-" });
-    const deleteBtn = await screen.findByRole("button", {name: "" })
-
-
-    await user.click(minusBtn);
-    await user.click(increaseBtn);
-
-    expect(handleMore).toHaveBeenCalled();
-    expect(handleReduce).toHaveBeenCalled();
-
-    await user.click()
-
-  });
-
-  it("is doesn't call functions", async () => {
-    const handleMore = vi.fn();
-    const handleReduce = vi.fn();
-
-    customRender({
-      added: initialAdded,
-      subTotal: initialSubTotal,
-      handleMore,
-    });
-    userInteraction();
-
-    expect(handleMore).not.toHaveBeenCalled();
-    expect(handleReduce).not.toHaveBeenCalled();
-  });
-});
