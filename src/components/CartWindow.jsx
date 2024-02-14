@@ -51,7 +51,7 @@ function CartWindow() {
               <div>
                 <button onClick={() => handleMore(art.id)}>+</button>
                 <button onClick={() => handleReduce(art.id)}>-</button>
-                <p data-testid={`amount-${art.id}`} >Amount: {art.mount} </p>
+                <p data-testid={`amount-${art.id}`} >Amount: {art.mount}</p>
               </div>
               <Delete onClick={() => handleDelete(art.id)}>Remove Item</Delete>
             </ElementCart>
