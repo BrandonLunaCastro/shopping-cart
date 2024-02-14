@@ -6,7 +6,7 @@ import ShoppingProvider, {
   ShoppingCartContext,
 } from "../context/ShoppingCartContext";
 import { BrowserRouter } from "react-router-dom";
-import MockRender from "./__mock__/mockRender";
+
 
 let initialAdded = [
   {
@@ -32,9 +32,6 @@ const userInteraction = async () => {
   const buttonCart = screen.getByAltText("cart-icon");
   user.click(buttonCart);
 };
-
-
-
 
 const customRender = (value = "") => {
   return render(
@@ -82,5 +79,3 @@ describe("component <NavBar />", () => {
     ).toBeInTheDocument();
   });
 });
-
-
