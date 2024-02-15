@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { ShoppingCartContext } from "../context/ShoppingCartContext";
 
 const Window = styled.article`
-  max-width: 500px;
+  width: 500px;
   max-height: 500px;
   overflow-y: scroll;
   border: 1px solid gray;
@@ -18,10 +18,33 @@ const Window = styled.article`
 const ElementCart = styled.figure`
   display: flex;
   flex-direction: column;
+  align-items: center;
   & > div > img {
-    width: 10rem;
-    height: 10rem;
+    width: 15rem;
+    height: 15rem;
   }
+  & > div > div {
+    text-align: center;
+  }
+
+  .price {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  .price-handling {
+    display: flex;
+    border: 1px solid gray;
+    & > p {
+      font-size: 1.5rem;
+      width: 50px;
+      text-align: center;
+    }
+    & > button {
+      width: 50px;
+    }
+  }
+
   border: 1px solid white;
   gap: 15px;
 `;
@@ -38,29 +61,33 @@ function CartWindow() {
     useContext(ShoppingCartContext);
   return (
     <Window>
-      <h2>Articles Added</h2>
       {added.length !== 0 ? (
         added.map((art) => {
           return (
+            <>
+            <h2>Articles Added</h2>
             <ElementCart key={art.id} data-testid="article-cart">
               <div>
                 <img src={art.image}></img>
-                <p>{art.title}</p>
-                <p>${art.price.toFixed(2)}</p>
+                <div>
+                  <p>{art.title}</p>
+                  <p className="price">${art.price.toFixed(2)}</p>
+                </div>
               </div>
-              <div>
+              <div className="price-handling">
                 <button onClick={() => handleMore(art.id)}>+</button>
+                <p data-testid={`amount-${art.id}`} >{art.mount}</p>
                 <button onClick={() => handleReduce(art.id)}>-</button>
-                <p data-testid={`amount-${art.id}`} >Amount: {art.mount}</p>
               </div>
               <Delete onClick={() => handleDelete(art.id)}>Remove Item</Delete>
             </ElementCart>
+            </>
           );
         })
       ) : (
         <p>The actual Cart is empty</p>
       )}
-      {added.length !== 0 && <p>SubTotal: ${subTotal}</p>}
+      {added.length !== 0 && <p>SubTotal: ${subTotal.toFixed(2)}</p>}
     </Window>
   );
 }
