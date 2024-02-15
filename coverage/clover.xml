@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1707935000636" clover="3.2.0">
-  <project timestamp="1707935000637" name="All files">
+<coverage generated="1708013100546" clover="3.2.0">
+  <project timestamp="1708013100547" name="All files">
     <metrics statements="72" coveredstatements="51" conditionals="16" coveredconditionals="9" methods="34" coveredmethods="23" elements="122" coveredelements="83" complexity="0" loc="72" ncloc="72" packages="5" files="11" classes="11"/>
     <package name="src">
       <metrics statements="1" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
@@ -109,8 +109,8 @@
         <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
         <line num="1" count="2" type="stmt"/>
         <line num="2" count="5" type="stmt"/>
-        <line num="3" count="5" type="stmt"/>
-        <line num="4" count="5" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="4" count="4" type="stmt"/>
       </file>
       <file name="getPrice.js" path="/home/brandox/Documentos/TOP/PROJECTS/shopping-cart/src/services/getPrice.js">
         <metrics statements="2" coveredstatements="0" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>

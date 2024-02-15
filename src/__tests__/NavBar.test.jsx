@@ -7,7 +7,6 @@ import ShoppingProvider, {
 } from "../context/ShoppingCartContext";
 import { BrowserRouter } from "react-router-dom";
 
-
 let initialAdded = [
   {
     id: 1,
@@ -57,7 +56,6 @@ describe("component <NavBar />", () => {
   });
 
   it("should be render a one articles", async () => {
-    //customRender({ added: initialAdded, subTotal: initialSubTotal });
     const value = { added: initialAdded, subTotal: initialSubTotal }
     customRender(value)
     userInteraction();

@@ -5,6 +5,7 @@ import { ShoppingCartContext } from "../context/ShoppingCartContext";
 import { BrowserRouter } from "react-router-dom";
 import CartWindow from "../components/CartWindow";
 
+
 let initialAdded = [
   {
     id: 1,
@@ -37,7 +38,7 @@ const customRender = (value = "") => {
   );
 };
 
-describe("test context functions", () => {
+describe("test functions", () => {
   beforeEach(() => {
     customRender({
       added: initialAdded,
@@ -65,8 +66,8 @@ describe("test context functions", () => {
     await user.click(minusBtn);
     await user.click(deleteBtn);
 
-    expect(handleMore).toHaveBeenCalled();
-    expect(handleReduce).toHaveBeenCalled();
+    expect(handleMore).toHaveBeenCalledTimes(1);
+    expect(handleReduce).toHaveBeenCalledTimes(1);
     expect(handleDelete).toHaveBeenCalledTimes(1);
   });
 
