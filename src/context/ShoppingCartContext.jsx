@@ -28,7 +28,7 @@ export default function ShoppingProvider ({children}) {
     const price = getPrice( data, id );
     const actualElement = added.find(el => el.id === id )
 
-    if ( actualElement.price - price <= 0 ) {
+    if ( actualElement.price - price < 1 ) {
       const stateFiltered = added.filter((element) => element.id != id )
       return setAdded(stateFiltered);
     }
