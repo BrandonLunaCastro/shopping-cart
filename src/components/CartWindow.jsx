@@ -8,23 +8,33 @@ const Window = styled.article`
   overflow-y: scroll;
   border: 1px solid gray;
   position: fixed;
-  background-color: #333;
-  color: white;
+  background-color: #fff;
+  color: #000;
   right: 0;
   top: 3rem;
   padding: 15px;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
 `;
 
-const ElementCart = styled.figure`
+/* const ElementCart = styled.figure`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 10px;
   & > div > img {
-    width: 15rem;
-    height: 15rem;
+    width: 12rem;
+    height: 12rem;
+    display: block;
+    margin: 0 auto;
   }
   & > div > div {
     text-align: center;
+  }
+
+  .title {
+    font-size: 1.2rem;
   }
 
   .price {
@@ -47,13 +57,28 @@ const ElementCart = styled.figure`
 
   border: 1px solid white;
   gap: 15px;
-`;
+`; */
+
+const Table = styled.table`
+  .td-image{
+    width: 70px;
+    height: 70px;
+  }
+`
 
 const Delete = styled.button`
   background-color: crimson;
+  width: 4rem;
   color: white;
-  width: 8rem;
   height: 3rem;
+  border-radius: 5px;
+  border: none;
+`;
+
+const Purchase = styled.button`
+  width: 200px;
+  height: 3rem;
+  font-weight: 3rem;
 `;
 
 function CartWindow() {
@@ -62,15 +87,40 @@ function CartWindow() {
   return (
     <Window>
       {added.length !== 0 ? (
-        added.map((art) => {
+        <Table>
+          {added.map((art) => {
+            return (
+              <tr key={art.id} data-testid="article-card">
+                <td>
+                  <img src={art.image} alt={art.title} className="td-image"/>
+                </td>
+                <td className="title">{art.title}</td>
+                <td className="price">${art.price.toFixed(2)}</td>
+                <td>
+                  <button onClick={() => handleMore(art.id)}>+</button>
+                </td>
+                <td>
+                  <p data-testid={`amount-${art.id}`}>{art.mount}</p>
+                </td>
+                <td>
+                  <button onClick={() => handleReduce(art.id)}>-</button>
+                </td>
+                <td>
+                  <Delete onClick={() => handleDelete(art.id)}>Remove Item</Delete>
+                </td>
+              </tr>
+            );
+          })}
+        </Table>
+      ) : (
+        /*         added.map((art) => {
           return (
             <>
-            <h2>Articles Added</h2>
             <ElementCart key={art.id} data-testid="article-cart">
               <div>
                 <img src={art.image}></img>
                 <div>
-                  <p>{art.title}</p>
+                  <p className="title">{art.title}</p>
                   <p className="price">${art.price.toFixed(2)}</p>
                 </div>
               </div>
@@ -83,11 +133,15 @@ function CartWindow() {
             </ElementCart>
             </>
           );
-        })
-      ) : (
+        }) */
         <p>The actual Cart is empty</p>
       )}
-      {added.length !== 0 && <p>SubTotal: ${subTotal.toFixed(2)}</p>}
+      {added.length !== 0 && (
+        <>
+          <p>Summary: ${subTotal.toFixed(2)}</p>
+          <Purchase>Purchase</Purchase>
+        </>
+      )}
     </Window>
   );
 }
