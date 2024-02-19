@@ -5,6 +5,7 @@ import {
 import NavBar from "../components/NavBar";
 import Home from "../components/Home";
 import Store from "../components/Store";
+import CartWindow from "../components/CartWindow";
 
 function Root() {
   const router = Router([
@@ -24,6 +25,10 @@ function Root() {
             <Store />
           ),
         },
+        {
+          path: "/cart",
+          element: <CartWindow />
+        }
       ],
     },
   ]);
