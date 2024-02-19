@@ -1,9 +1,8 @@
 import { NavLink, Outlet } from "react-router-dom";
 import styled from "styled-components";
 import cart from "../assets/svg/cart-shopping.svg";
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ShoppingCartContext } from "../context/ShoppingCartContext";
-import CartWindow from "./CartWindow";
 
 // styles
 const Nav = styled.nav`
@@ -56,9 +55,6 @@ const AmountElements = styled.span`
 
 function NavBar() {
   const { added } = useContext(ShoppingCartContext);
-  const [cartOpen, setCart] = useState(false);
-  const handleCart = () => setCart(!cartOpen);
-
   return (
     <>
       <Nav>
@@ -71,12 +67,13 @@ function NavBar() {
             <NavLink to="/store">Store</NavLink>
           </li>
           <li>
-            <Cart src={cart} alt="cart-icon" onClick={handleCart}></Cart>
-            <AmountElements>{added.length}</AmountElements>
+            <NavLink to="/cart">
+              <Cart src={cart} alt="cart-icon"></Cart>
+              <AmountElements>{added.length}</AmountElements>
+            </NavLink>
           </li>
         </List>
       </Nav>
-      {cartOpen && <CartWindow />}
       <Detail id="detail">
         <Outlet></Outlet>
       </Detail>
