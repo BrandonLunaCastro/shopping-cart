@@ -35,8 +35,8 @@ const Card = styled.article`
   }
 
   .add__cart{
-    background-color: #15b00d;
-    color:  white;
+    background-color: #068FFF;
+    color:  #EEEEEE;
     border: none;
     font-size: 1.2rem;
     width: 100%;
