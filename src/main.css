@@ -1,6 +1,9 @@
-
 #root{
     font-family: "Roboto", sans-serif;
     font-weight: 500;
     font-style: normal;
+    --main-color: #0000;
+    --second-color: #068FFF;
+    --third-color: #EEEEEE;
+
 }
