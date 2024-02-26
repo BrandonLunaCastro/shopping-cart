@@ -6,8 +6,7 @@ import { ShoppingCartContext } from "../context/ShoppingCartContext";
 
 // styles
 const Nav = styled.nav`
-  background-color: #f4f4f2;
-  color: red;
+  background-color: #EAF6F6;
   display: flex;
   justify-content: space-around;
   position: fixed;
@@ -15,7 +14,6 @@ const Nav = styled.nav`
   right: 0;
   left: 0;
   height: 3rem;
-  background: transparent;
   backdrop-filter: blur(1rem);
   border-bottom: 1px solid #e8e8e8;
 `;
