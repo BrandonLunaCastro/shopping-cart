@@ -1,13 +1,18 @@
 import {
   createBrowserRouter as Router,
   RouterProvider,
+  useParams,
 } from "react-router-dom";
 import NavBar from "../components/NavBar";
-import Home from "../components/Home";
-import Store from "../components/Store";
-import CartWindow from "../components/CartWindow";
+import Home from "../Pages/Home";
+import Store from "../Pages/Store";
+import CartWindow from "../Pages/CartWindow";
+import Product from "../components/Product";
+import fetchArticle from "../services/fetchArticle";
 
 function Root() {
+  let { id } = useParams()
+  console.log(id)
   const router = Router([
     {
       path: "/",
@@ -24,6 +29,15 @@ function Root() {
           element: (
             <Store />
           ),
+        },
+        {
+          path: "store/:id",
+          element: (
+            <Product />
+          ),
+          loader: async ({params}) => {
+            return await fetchArticle(params.id)
+          }
         },
         {
           path: "/cart",
