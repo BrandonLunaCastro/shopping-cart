@@ -17,7 +17,7 @@ export default function ShoppingProvider ({children}) {
     const price = getPrice( data, id );
     const newState = added.map((art) => {
       if ( art.id === id ) {
-        return {...art, price: art.price + price, mount: art.mount + 1 }
+        return {...art, price: art.price + price, amount: art.amount + 1 }
       }
       return art
     })
@@ -35,7 +35,7 @@ export default function ShoppingProvider ({children}) {
     
     const newState = added.map((art) => {
       if ( art.id === id ) {
-        return {...art, price: art.price - price, mount: art.mount - 1 }
+        return {...art, price: art.price - price, amount: art.amount - 1 }
       }
       return art
     })
