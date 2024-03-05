@@ -1,8 +1,6 @@
-import "react-image-gallery/styles/css/image-gallery.css";
 import styled from "styled-components";
 import fetchData from "../services/fetchData";
 import { useEffect, useState } from "react";
-import ReactImageGallery from "react-image-gallery";
 
 const BackgroundImage = styled.div`
   background-image: url("./src/assets/images/bg.jpg");
@@ -20,7 +18,7 @@ const BackgroundImage = styled.div`
   margin:50px auto;
   object-fit: cover;
   z-index: -1;
-` */
+`*/
 
 function Home() {
   const [data, setData] = useState([])
@@ -40,17 +38,7 @@ function Home() {
 
   return (
     <>
-      <h1>You are in Home</h1>
       <BackgroundImage data-testid="bg-image" ></BackgroundImage>
-{/*       <SliderContainer>
-        <ReactImageGallery 
-          items={images}
-          showPlayButton={false} 
-          showFullscreenButton={false}
-          slideInterval={1000}
-          autoPlay={true}
-        />
-      </SliderContainer> */}
     </>
   );
 }
