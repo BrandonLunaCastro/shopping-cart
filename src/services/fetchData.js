@@ -1,5 +1,7 @@
-const fetchData = async () => {
-    const data = await fetch('https://fakestoreapi.com/products/',{mode:"cors"})
+const URL = 'https://fakestoreapi.com/products/'
+
+const fetchData = async (URL) => {
+    const data = await fetch(URL,{mode:"cors"})
     const json = await data.json()
     return json;
 }
