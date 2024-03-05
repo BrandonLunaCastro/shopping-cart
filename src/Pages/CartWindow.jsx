@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { ShoppingCartContext } from "../context/ShoppingCartContext";
+import { Link } from "react-router-dom";
 
 const Window = styled.article`
   color: #000;
@@ -25,7 +26,6 @@ const Table = styled.table`
   table-layout:fixed;
   border-collapse: collapse;
   width: 100%;
-  border: 2px solid #66BFBF;
   text-align: center;
   vertical-align: middle;
   color: #333;
@@ -38,28 +38,39 @@ const Table = styled.table`
   }
 
   thead {
-    border-bottom: 2px solid #66BFBF;
-    color: #fff;
-    background-color: #66BFBF;
+    color: #000;
+    background-color: #F2EFE5;
+  }
+
+  td:nth-child(2) {
+    text-transform: uppercase;
+
   }
 
   td:nth-child(4) {
     display: flex;
     justify-content: center;
     align-items: center;
+    color: #515151;
+    border: 1px solid #F4EAE0;
+    padding: 0;
+    width: fit-content;
     & > p {
       padding: 0 10px 0 10px;
     }
     & > button {
-      background-color: #66BFBF;
-      border: none;
-      color: #EEEE;
-      border-radius: 100%;
-      font-size: 1.4rem;
-      width: 2rem;
-      height: 2rem;
-      box-shadow: 0px 0px 4px #333;
       cursor: pointer;
+      background: transparent;
+      border: none;
+      padding: 10px 15px;
+      color: #515151;
+    }
+    & > :first-child {
+      border-right: 1px solid #F4EAE0;
+      height: max-content;
+    }
+    & > :last-child {
+      border-left: 1px solid #F4EAE0;
     }
   }
 
@@ -74,12 +85,21 @@ const Table = styled.table`
 `
 
 const Delete = styled.button`
-  background-color: #FF0063;
-  width:6rem;
-  color: white;
-  height: 3rem;
-  border-radius: 5px;
-  border: none;
+  border-radius: 100%;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 1px solid #cecece;
+  color: #cecece;
+  background-color: transparent;
+  text-align: center;
+  transition: all .3s ease-in;
+  cursor: pointer;
+  font-size: 1rem;
+  &:hover {
+    border: 1px solid #646464;
+    color: #646464;
+    font-weight: 700;
+  }
 `;
 
 const Purchase = styled.button`
@@ -87,13 +107,21 @@ const Purchase = styled.button`
   height: 3rem;
   font-weight: 3rem;
   border: none;
-  border-radius: 5px;
-  background-color: #66BFBF;
-  color: #fff;
+  border-radius: 2px;
+  background-color: #000000;
+  color: #FAF6F0;
   font-size: 1.2rem;
-  box-shadow: 1px 1px 4px #333;
   cursor: pointer;
 `;
+
+const Empty = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+`
+
 
 function CartWindow() {
   const { added, handleMore, handleReduce, handleDelete, subTotal } =
@@ -116,6 +144,7 @@ function CartWindow() {
             return (
               <tr key={art.id} data-testid="article-card">
                 <th>
+                  <Delete onClick={() => handleDelete(art.id)}>x</Delete>
                   <img src={art.image} alt={art.title} className="td-image"/>
                 </th>
                 <td className="title">{art.title}</td>
@@ -125,9 +154,6 @@ function CartWindow() {
                   <p data-testid={`amount-${art.id}`}>{art.amount}</p>
                   <button onClick={() => handleReduce(art.id)}>-</button>
                 </td>
-                <td>
-                  <Delete onClick={() => handleDelete(art.id)}>Remove Item</Delete>
-                </td>
                 
               </tr>
             );
@@ -135,15 +161,23 @@ function CartWindow() {
           </tbody>
         </Table>
       ) : (
-        <p>The actual Cart is empty</p>
+        <Empty>
+          <p>The actual Cart is empty</p>
+          <Link to="/store" >Go to shopping</Link>
+        </Empty>
       )}
       {added.length !== 0 && (
         <div className="purchase-handling">
-          <p>Summary: ${subTotal.toFixed(2)}</p>
+          <h1>Summary: </h1>
+          <div>
+            <p>Subtotal: ${subTotal.toFixed(2)}</p>
+            
+          </div>
           <Purchase>Purchase</Purchase>
         </div>
       )}
     </Window>
   );
 }
+//
 export default CartWindow;
