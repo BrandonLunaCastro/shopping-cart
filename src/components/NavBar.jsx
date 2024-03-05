@@ -6,7 +6,7 @@ import { ShoppingCartContext } from "../context/ShoppingCartContext";
 
 // styles
 const Nav = styled.nav`
-  background-color: #EAF6F6;
+  background-color: #FAF6F0;
   display: flex;
   justify-content: space-around;
   position: fixed;
@@ -59,7 +59,7 @@ function NavBar() {
         <Logo src="./src/assets/images/logo.png" alt="logo"></Logo>
         <List>
           <li>
-            <NavLink to="/">Home</NavLink>
+            <NavLink to="/" >Home</NavLink>
           </li>
           <li>
             <NavLink to="/store">Store</NavLink>
