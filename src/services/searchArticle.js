@@ -1,0 +1,1 @@
+export const searchArticle = (arr, name) => arr.filter((el) => el.title.toLowerCase().includes(name.toLowerCase())) 
