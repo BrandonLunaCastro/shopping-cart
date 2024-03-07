@@ -45,12 +45,11 @@ const Handling = styled.div`
   & > button {
     min-width: 8rem;
     min-height: 3rem;
-    background-color: #66bfbf;
+    background-color: #000000;
     color: #fff;
-    border-radius: 5px;
+    border-radius: 2px;
     border: none;
     font-size: 1.2rem;
-    box-shadow: 0 0 4px #333;
   }
   & > div > label {
     padding-right: 5px;
