@@ -13,6 +13,12 @@ const Figure = styled.figure`
     object-fit: contain;
     object-position: top;
   }
+
+  figcaption {
+    font-size: 2rem;
+    font-weight: 700 ;
+  }
+
   & > p {
     text-align: center;
   }

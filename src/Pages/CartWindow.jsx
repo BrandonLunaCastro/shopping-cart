@@ -9,21 +9,15 @@ const Window = styled.article`
   display: flex;
   flex-direction: column;
   gap: 25px;
-
-  .purchase-handling {
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    & > p {
-      font-size: 1.4rem;
-      padding-bottom: 1rem;
-    }
-  }
+  font-size: calc(20px + 0.2vw);
 `;
 
+const TableContainer = styled.div`
+  max-width: 100%;
+`;
 
 const Table = styled.table`
-  table-layout:fixed;
+  table-layout: fixed;
   border-collapse: collapse;
   width: 100%;
   text-align: center;
@@ -32,57 +26,73 @@ const Table = styled.table`
   margin-bottom: 16px;
   font-size: 1.2rem;
 
-  .td-image{
+  .td-image {
     width: 70px;
     height: 70px;
   }
 
   thead {
     color: #000;
-    background-color: #F2EFE5;
+    background-color: #f2efe5;
   }
 
   td:nth-child(2) {
     text-transform: uppercase;
-
   }
 
-  td:nth-child(4) {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: #515151;
-    border: 1px solid #F4EAE0;
-    padding: 0;
-    width: fit-content;
-    & > p {
-      padding: 0 10px 0 10px;
-    }
-    & > button {
-      cursor: pointer;
-      background: transparent;
-      border: none;
-      padding: 10px 15px;
-      color: #515151;
-    }
-    & > :first-child {
-      border-right: 1px solid #F4EAE0;
-      height: max-content;
-    }
-    & > :last-child {
-      border-left: 1px solid #F4EAE0;
-    }
-  }
-
-  th, td {
+  th,
+  td {
     padding: 8px;
   }
 
-  thead, th {
+  thead,
+  th {
     width: 20%;
   }
 
-`
+  .article-card > td:first-child {
+    display: flex;
+    align-items: center;
+    gap:25px;
+      
+  } 
+
+  @media screen and (max-width: 630px) {
+    font-size: 0.5rem;
+  }
+`;
+
+const PurchaseHandling = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  color: #515151;
+  border: 1px solid #f4eae0;
+  padding: 0;
+  width: fit-content;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  & > p {
+    padding: 0 10px 0 10px;
+  }
+
+  & > button {
+    cursor: pointer;
+    background: transparent;
+    border: none;
+    padding: 10px 15px;
+    color: #515151;
+  }
+  & > :first-child {
+    border-right: 1px solid #f4eae0;
+    height: max-content;
+  }
+  & > :last-child {
+    border-left: 1px solid #f4eae0;
+  }
+`;
 
 const Delete = styled.button`
   border-radius: 100%;
@@ -92,7 +102,7 @@ const Delete = styled.button`
   color: #cecece;
   background-color: transparent;
   text-align: center;
-  transition: all .3s ease-in;
+  transition: all 0.3s ease-in;
   cursor: pointer;
   font-size: 1rem;
   &:hover {
@@ -107,9 +117,10 @@ const Purchase = styled.button`
   height: 3rem;
   font-weight: 3rem;
   border: none;
-  border-radius: 2px;
+  border-radius: 5rem;
   background-color: #000000;
-  color: #FAF6F0;
+  margin-bottom: 10px;
+  color: #faf6f0;
   font-size: 1.2rem;
   cursor: pointer;
 `;
@@ -120,8 +131,30 @@ const Empty = styled.div`
   align-items: center;
   justify-content: center;
   font-size: 2rem;
-`
+`;
+const Subtotal = styled.div`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 40%;
+  margin: 0 0 0 60%;
 
+  & > p {
+    font-size: 1rem;
+    padding-bottom: 1rem;
+  }
+
+  .subtotal-title {
+    background-color: #f2efe5;
+    width: 100%;
+    text-align: center;
+  }
+
+  & > div {
+    padding: 10px;
+  }
+
+`;
 
 function CartWindow() {
   const { added, handleMore, handleReduce, handleDelete, subTotal } =
@@ -129,52 +162,58 @@ function CartWindow() {
   return (
     <Window>
       {added.length !== 0 ? (
-        <Table>
-          <thead>
-            <tr>
-              <th></th>
-              <th>Title</th>
-              <th>Price</th>
-              <th>Amount</th>
-              <th></th>
-            </tr>
-          </thead>
-          <tbody>
-          {added.map((art) => {
-            return (
-              <tr key={art.id} data-testid="article-card">
-                <th>
-                  <Delete onClick={() => handleDelete(art.id)}>x</Delete>
-                  <img src={art.image} alt={art.title} className="td-image"/>
-                </th>
-                <td className="title">{art.title}</td>
-                <td className="price">${art.price.toFixed(2)}</td>
-                <td>
-                  <button onClick={() => handleMore(art.id)}>+</button>
-                  <p data-testid={`amount-${art.id}`}>{art.amount}</p>
-                  <button onClick={() => handleReduce(art.id)}>-</button>
-                </td>
-                
+        <TableContainer>
+          <Table>
+            <thead>
+              <tr>
+                <th></th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Amount</th>
               </tr>
-            );
-          })}
-          </tbody>
-        </Table>
+            </thead>
+            <tbody>
+              {added.map((art) => {
+                return (
+                  <tr key={art.id} data-testid="article-card" className="article-card">
+                    <td>
+                      <Delete onClick={() => handleDelete(art.id)}>x</Delete>
+                      <img
+                        src={art.image}
+                        alt={art.title}
+                        className="td-image"
+                      />
+                    </td>
+                    <td className="title">{art.title}</td>
+                    <td className="price">${art.price.toFixed(2)}</td>
+                    <td>
+                      <PurchaseHandling>
+                        <button onClick={() => handleMore(art.id)}>+</button>
+                        <p data-testid={`amount-${art.id}`}>{art.amount}</p>
+                        <button onClick={() => handleReduce(art.id)}>-</button>
+                      </PurchaseHandling>
+                    </td>
+                  </tr>
+                );
+              })}
+            </tbody>
+          </Table>
+        </TableContainer>
       ) : (
         <Empty>
           <p>The actual Cart is empty</p>
-          <Link to="/store" >Go to shopping</Link>
+          <Link to="/store">Go to shopping</Link>
         </Empty>
       )}
       {added.length !== 0 && (
-        <div className="purchase-handling">
-          <h1>Summary: </h1>
+        <Subtotal>
+          <h1 className="subtotal-title">Total of Cart</h1>
           <div>
+            <p>Summary: </p>
             <p>Subtotal: ${subTotal.toFixed(2)}</p>
-            
           </div>
           <Purchase>Purchase</Purchase>
-        </div>
+        </Subtotal>
       )}
     </Window>
   );

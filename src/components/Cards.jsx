@@ -25,11 +25,17 @@ const Card = styled.article`
   gap: 10px;
   overflow: hidden;
 
-  & > a > img {
+  img {
     width: 7rem;
     height: 7rem;
     object-fit: contain;
   }
+
+  img:hover {
+    object-fit: cover;
+    object-position: center;
+  }
+
 
   .title {
     text-align: center;

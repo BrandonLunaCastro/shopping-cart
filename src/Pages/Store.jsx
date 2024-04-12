@@ -10,6 +10,7 @@ const Filter = styled.section`
   display: flex;
   justify-content: center;
   gap: 1rem;
+  flex-wrap: wrap;
   & > div > * {
     margin: 2px;
   } 

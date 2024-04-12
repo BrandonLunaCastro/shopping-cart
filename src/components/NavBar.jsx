@@ -6,7 +6,7 @@ import { ShoppingCartContext } from "../context/ShoppingCartContext";
 
 // styles
 const Nav = styled.nav`
-  background-color: #FAF6F0;
+  background-color: transparent;
   display: flex;
   justify-content: space-around;
   position: fixed;
@@ -22,9 +22,52 @@ const List = styled.nav`
   justify-content: center;
   align-items: center;
   gap: 20px;
+
   & > li {
     list-style-type: none;
+  }
+  
+  .active {
+    color:#e0a76a;
+  }
+
+  a {
     text-decoration: none;
+    color: #f8daba;
+  }
+
+  & > li:nth-child(1),
+  & > li:nth-child(2) {
+    position: relative;
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+
+  & > li:nth-child(1)::after,
+  & > li:nth-child(2)::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    position: absolute;
+    bottom: -5px;
+    left:0px;
+    background-color: #F4DFC8;
+    transition: 0.3s;
+  } 
+  & > li:nth-child(1)::after,
+  & > li:nth-child(2)::after {
+    content: "";
+    width: 0;
+    height: 2px;
+    position: absolute;
+    bottom: -5px;
+    left:0px;
+    background-color: #F4DFC8;
+    transition: 0.3s;
+  } 
+  & > li:nth-child(1):hover:after,
+  & > li:nth-child(2):hover:after {
+    width: 100%;
   }
 `;
 const Logo = styled.img`
@@ -40,15 +83,19 @@ const Cart = styled.img`
   width: 2rem;
   height: 2rem;
   cursor: pointer;
+  position: relative;
 `;
 
 const AmountElements = styled.span`
-  background-color: #000;
-  padding: 5px;
-  color: white;
-  border-radius: 100%;
-  font-size: 1rem;
   position: absolute;
+  background-color: #000000;
+  color: #FAF6F0;
+  line-height: 20px;
+  border: 1px solid #000000;
+  width: 20px;
+  border-radius: 50%;
+  text-align: center;
+  font-size: 0.8rem;
 `;
 
 function NavBar() {
@@ -59,10 +106,24 @@ function NavBar() {
         <Logo src="./src/assets/images/logo.png" alt="logo"></Logo>
         <List>
           <li>
-            <NavLink to="/" >Home</NavLink>
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isActive ? "active" : isPending ? "pending" : ""
+              }
+              to="/"
+            >
+              Home
+            </NavLink>
           </li>
           <li>
-            <NavLink to="/store">Store</NavLink>
+            <NavLink
+              className={({ isActive, isPending }) =>
+                isActive ? "active" : isPending ? "pending" : ""
+              }
+              to="/store"
+            >
+              Shop
+            </NavLink>
           </li>
           <li>
             <NavLink to="/cart">
